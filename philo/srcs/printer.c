@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_utils.c                                      :+:      :+:    :+:   */
+/*   printer.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omanar <omanar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 18:40:13 by omanar            #+#    #+#             */
-/*   Updated: 2022/05/28 18:42:50 by omanar           ###   ########.fr       */
+/*   Updated: 2022/05/28 18:51:17 by omanar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,19 @@ long	get_time(long start)
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000) - start);
 }
 
-void ft_usleep(long usec)
+void	ft_usleep(long usec)
 {
-	long time;
+	long	time;
 
 	time = get_time(0);
 	while (get_time(time) * 1000 < usec)
 		usleep(100);
 }
 
-void printer(t_philo *ph, char *str)
+void	printer(t_philo *ph, char *str)
 {
 	pthread_mutex_lock(&ph->data->message);
-	printf("%ld ms : Philosopher %d %s", get_time(ph->data->start_time), ph->id, str);
+	printf("%ld ms : Philosopher %d %s",
+		get_time(ph->data->start_time), ph->id, str);
 	pthread_mutex_lock(&ph->data->message);
 }

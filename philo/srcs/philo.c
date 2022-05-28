@@ -6,7 +6,7 @@
 /*   By: omanar <omanar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 13:05:33 by omanar            #+#    #+#             */
-/*   Updated: 2022/05/28 18:44:20 by omanar           ###   ########.fr       */
+/*   Updated: 2022/05/28 18:51:26 by omanar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	main(int ac, char **av)
 {
 	t_data	data;
-	t_philo *ph;
+	t_philo	*ph;
 
 	if ((ac != 5 && ac != 6) || checker(av))
 		return (printf("Invalid Arguments\n"));
@@ -24,7 +24,7 @@ int	main(int ac, char **av)
 		return (printf("Error: Aloccation Failed\n"));
 	parsing(&data, ph, ac, av);
 	philosophers(ph);
-	while(1)
+	while (1)
 	{
 		if (shinigami(ph))
 			return (0);

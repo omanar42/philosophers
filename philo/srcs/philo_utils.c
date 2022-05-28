@@ -6,23 +6,24 @@
 /*   By: omanar <omanar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 18:43:12 by omanar            #+#    #+#             */
-/*   Updated: 2022/05/28 18:45:26 by omanar           ###   ########.fr       */
+/*   Updated: 2022/05/28 18:52:49 by omanar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int shinigami(t_philo *ph)
+int	shinigami(t_philo *ph)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < ph[0].data->nb_of_phs)
 	{
-		if (get_time(ph[i].data->start_time + ph[i].last_meal_time)  >= ph[i].data->time_to_die)
+		if (get_time(ph[i].data->start_time
+				+ ph[i].last_meal_time) >= ph[i].data->time_to_die)
 		{
 			died(&ph[i]);
-			return (1);		
+			return (1);
 		}
 		i++;
 	}
@@ -55,7 +56,7 @@ int	checker(char **av)
 
 void	parsing(t_data *data, t_philo *ph, int ac, char **av)
 {
-	int i;
+	int	i;
 
 	data->nb_of_phs = ft_atoi(av[1]);
 	data->nb_of_forks = ft_atoi(av[1]);
@@ -75,7 +76,7 @@ void	parsing(t_data *data, t_philo *ph, int ac, char **av)
 		ph[i].start_time = 0;
 		ph[i].left_fork = i;
 		ph[i].right_fork = i + 1;
-		if(i == data->nb_of_phs - 1)
+		if (i == data->nb_of_phs - 1)
 			ph[i].right_fork = 0;
 		ph[i].data = data;
 		i++;
@@ -84,7 +85,7 @@ void	parsing(t_data *data, t_philo *ph, int ac, char **av)
 
 void	philosophers(t_philo *ph)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	ph->data->start_time = get_time(0);

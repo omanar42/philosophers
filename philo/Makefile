@@ -13,7 +13,7 @@
 NAME	=	philo
 CC		=	gcc
 RM		=	rm -f
-SRCS	=	philo.c ft_atoi.c
+SRCS	=	srcs/philo.c srcs/philo_utils.c srcs/ft_atoi.c srcs/simulation.c srcs/printer.c
 OBJS	=	$(SRCS:.c=.o)
 
 define HEADER_M

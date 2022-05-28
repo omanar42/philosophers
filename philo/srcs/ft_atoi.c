@@ -6,11 +6,11 @@
 /*   By: omanar <omanar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 17:11:44 by omanar            #+#    #+#             */
-/*   Updated: 2022/05/25 02:03:32 by omanar           ###   ########.fr       */
+/*   Updated: 2022/05/28 18:39:47 by omanar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/philo.h"
+#include "../includes/philo.h"
 
 static int	ft_checklong(int res, int count, int is_neg)
 {

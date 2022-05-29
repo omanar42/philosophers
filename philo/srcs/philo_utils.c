@@ -6,21 +6,33 @@
 /*   By: omanar <omanar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 18:43:12 by omanar            #+#    #+#             */
-/*   Updated: 2022/05/28 18:52:49 by omanar           ###   ########.fr       */
+/*   Updated: 2022/05/29 21:43:42 by omanar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
+int	is_enough(t_philo *ph)
+{
+	if (ph->meals == ph->data->meals)
+		return (0);
+	return (1);
+}
+
 int	shinigami(t_philo *ph)
 {
 	int	i;
+	int	time;
 
 	i = 0;
-	while (i < ph[0].data->nb_of_phs)
+	while (i < ph->data->nb_of_phs)
 	{
-		if (get_time(ph[i].data->start_time
-				+ ph[i].last_meal_time) >= ph[i].data->time_to_die)
+		time = get_time(ph[i].data->start_time + ph[i].last_meal_time);
+		if (ph[i].meals >= ph[i].data->meals && ph[i].data->meals != -1)
+			ph->data->full++;
+		if (ph->data->full == ph->data->nb_of_phs && ph[i].data->meals != -1)
+			return (1);
+		if (time >= ph[i].data->time_to_die)
 		{
 			died(&ph[i]);
 			return (1);
@@ -59,21 +71,25 @@ void	parsing(t_data *data, t_philo *ph, int ac, char **av)
 	int	i;
 
 	data->nb_of_phs = ft_atoi(av[1]);
-	data->nb_of_forks = ft_atoi(av[1]);
 	data->time_to_die = ft_atoi(av[2]);
 	data->time_to_eat = ft_atoi(av[3]);
+	data->start_time = get_time(0);
 	data->time_to_sleep = ft_atoi(av[4]);
+	data->full = 0;
 	if (ac == 6)
-		data->number_of_eat = ft_atoi(av[5]);
+		data->meals = ft_atoi(av[5]);
 	else
-		data->number_of_eat = -1;
+		data->meals = -1;
 	i = 0;
+	pthread_mutex_init(&data->message, NULL);
 	data->mutex = malloc(sizeof(pthread_mutex_t) * data->nb_of_phs);
 	while (i < data->nb_of_phs)
 	{
+		ph[i].meals = 0;
 		ph[i].id = i + 1;
 		pthread_mutex_init(&data->mutex[i], NULL);
 		ph[i].start_time = 0;
+		ph[i].last_meal_time = 0;
 		ph[i].left_fork = i;
 		ph[i].right_fork = i + 1;
 		if (i == data->nb_of_phs - 1)
@@ -88,17 +104,16 @@ void	philosophers(t_philo *ph)
 	int	i;
 
 	i = 0;
-	ph->data->start_time = get_time(0);
 	while (i < ph->data->nb_of_phs)
 	{
-		pthread_create(&ph[i].th, NULL, &simulation, (void *)&ph[i]);
+		pthread_create(&ph[i].th, NULL, &simulation, &ph[i]);
 		i += 2;
 	}
 	usleep(100);
 	i = 1;
 	while (i < ph->data->nb_of_phs)
 	{
-		pthread_create(&ph[i].th, NULL, &simulation, (void *)&ph[i]);
+		pthread_create(&ph[i].th, NULL, &simulation, &ph[i]);
 		i += 2;
 	}
 }

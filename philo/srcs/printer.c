@@ -6,7 +6,7 @@
 /*   By: omanar <omanar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 18:40:13 by omanar            #+#    #+#             */
-/*   Updated: 2022/05/28 18:51:17 by omanar           ###   ########.fr       */
+/*   Updated: 2022/05/29 18:57:25 by omanar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,9 @@ void	ft_usleep(long usec)
 		usleep(100);
 }
 
-void	printer(t_philo *ph, char *str)
+void	printer(t_philo *ph, char *str, long time)
 {
 	pthread_mutex_lock(&ph->data->message);
-	printf("%ld ms : Philosopher %d %s",
-		get_time(ph->data->start_time), ph->id, str);
-	pthread_mutex_lock(&ph->data->message);
+	printf("%ld ms : Philosopher %d %s", time, ph->id, str);
+	pthread_mutex_unlock(&ph->data->message);
 }

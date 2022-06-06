@@ -10,25 +10,11 @@
 #                                                 #
 # *********************************************** #
 
-NAME	=	philo
-PHILOBN	=	philo_bonus
-CC		=	gcc
+NAME	=	philo_bonus
+CC		=	gcc -g -fsanitize=thread
 RM		=	rm -f
-
-SRCS	=	philo/philo.c philo/atoi.c
+SRCS	=	srcs/philo_bonus.c srcs/philo_utils.c srcs/ft_atoi.c srcs/simulation.c srcs/printer.c
 OBJS	=	$(SRCS:.c=.o)
-SRCSBN	=	
-OBJSBN	=	$(SRCSBN:.c=.o)
-
-define HEADER_M
-           __    _ __                       __                  
-    ____  / /_  (_) /___  _________  ____  / /_  ___  __________
-   / __ \/ __ \/ / / __ \/ ___/ __ \/ __ \/ __ \/ _ \/ ___/ ___/
-  / /_/ / / / / / / /_/ (__  ) /_/ / /_/ / / / /  __/ /  (__  ) 
- / .___/_/ /_/_/_/\____/____/\____/ .___/_/ /_/\___/_/  /____/  
-/_/                              /_/                            
-endef
-export HEADER_M
 
 define HEADER_B
            __    _ __           __                          
@@ -40,10 +26,7 @@ define HEADER_B
 endef
 export HEADER_B
 
-all: header_m $(NAME)
-
-header_m:
-	@echo "\033[0;32m$$HEADER_M\033[0m\n"
+all: header_b $(NAME)
 
 header_b:
 	@echo "\033[0;32m$$HEADER_B\033[0m\n"
@@ -52,22 +35,17 @@ header_b:
 	@ $(CC) -Wall -Wextra -Werror -c $< -o $@
 
 $(NAME): $(OBJS)
-	@echo "\033[0;36m</ Compiling Philosophers >\033[0m"
-	@$(CC) $(OBJS) -o $(NAME)
-	@echo "\033[1;32mPhilosophers has been compiled!\033[0m\n"
-
-$(PHILOBN): $(OBJSBN)
 	@echo "\033[0;36m</ Compiling philo_bonus >\033[0m"
-	@$(CC) $(OBJSBN) -o $(PHILOBN)
+	@$(CC) $(OBJS) -o $(NAME)
 	@echo "\033[1;32mphilo_bonus has been compiled!\033[0m\n"
 
-bonus: header_b $(PHILOBN)
+bonus: header_b $(NAME)
 
 clean:
-	@$(RM) $(OBJS) $(OBJSBN)
+	@$(RM) $(OBJS)
 
 fclean: clean
-	@$(RM) $(PHILOBN)
+	@$(RM) $(NAME)
 	@echo "\n\033[0;31m</ EVERYTHING HAS BEEN DELETED! >\033[0m\n"
 
 re: fclean all

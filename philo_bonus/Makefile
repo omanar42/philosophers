@@ -11,7 +11,7 @@
 # *********************************************** #
 
 NAME	=	philo_bonus
-CC		=	gcc -g -fsanitize=thread
+CC		=	gcc
 RM		=	rm -f
 SRCS	=	srcs/philo_bonus.c srcs/philo_utils.c srcs/ft_atoi.c srcs/simulation.c srcs/printer.c
 OBJS	=	$(SRCS:.c=.o)

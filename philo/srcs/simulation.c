@@ -6,7 +6,7 @@
 /*   By: omanar <omanar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 18:41:18 by omanar            #+#    #+#             */
-/*   Updated: 2022/06/03 23:02:13 by omanar           ###   ########.fr       */
+/*   Updated: 2022/06/06 22:05:54 by omanar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	eating(t_philo *ph)
 	pthread_mutex_lock(&ph->data->mutex[ph->left_fork]);
 	printer(ph, "has taken a fork\n", get_time(ph->data->start_time));
 	pthread_mutex_lock(&ph->data->mutex[ph->right_fork]);
-	printer(ph, "has taken a fork\n",get_time(ph->data->start_time));
-	printer(ph, "is eating\n",get_time(ph->data->start_time));
+	printer(ph, "has taken a fork\n", get_time(ph->data->start_time));
+	printer(ph, "is eating\n", get_time(ph->data->start_time));
 	pthread_mutex_lock(&ph->data->time);
 	ph->meals++;
 	ph->last_meal_time = get_time(ph->data->start_time);
@@ -30,7 +30,7 @@ void	eating(t_philo *ph)
 
 void	sleeping(t_philo *ph)
 {
-	printer(ph, "is sleeping\n",get_time(ph->data->start_time));
+	printer(ph, "is sleeping\n", get_time(ph->data->start_time));
 	ft_usleep(ph->data->time_to_sleep * 1000);
 }
 

@@ -6,7 +6,7 @@
 /*   By: omanar <omanar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 13:04:43 by omanar            #+#    #+#             */
-/*   Updated: 2022/06/03 22:57:20 by omanar           ###   ########.fr       */
+/*   Updated: 2022/06/06 22:35:40 by omanar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,32 +20,32 @@
 # include <sys/time.h>
 
 typedef struct s_data {
+	int				full;
+	int				meals;
 	int				nb_of_phs;
 	long			time_to_die;
 	long			time_to_eat;
 	long			time_to_sleep;
-	int				meals;
-	int				full;
 	long			start_time;
 	pthread_mutex_t	*mutex;
-	pthread_mutex_t	message;
 	pthread_mutex_t	time;
+	pthread_mutex_t	message;
 }	t_data;
 
 typedef struct s_philo {
 	int			id;
 	int			meals;
-	long		start_time;
-	long		last_meal_time;
 	int			left_fork;
 	int			right_fork;
+	long		last_meal_time;
 	pthread_t	th;
 	t_data		*data;
 }	t_philo;
 
 int		ft_atoi(const char *str);
 int		checker(char **av);
-void	parsing(t_data *data, t_philo *ph, int ac, char **av);
+void	parsing(t_data *data, int ac, char **av);
+void	preparing(t_data *data, t_philo *ph);
 void	philosophers(t_philo *ph);
 void	*simulation(void *arg);
 void	eating(t_philo *ph);

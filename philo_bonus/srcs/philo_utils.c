@@ -6,7 +6,7 @@
 /*   By: omanar <omanar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 18:43:12 by omanar            #+#    #+#             */
-/*   Updated: 2022/06/07 02:43:47 by omanar           ###   ########.fr       */
+/*   Updated: 2022/06/08 00:11:49 by omanar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	*shinigami(void *arg)
 	ph->data->start_time = get_time(0);
 	while (1)
 	{
-		sem_wait(ph->data->time);
+		wait(ph->data->time);
 		time = get_time(ph->data->start_time + ph->last_meal_time);
 		sem_post(ph->data->time);
 		if (time >= ph->data->time_to_die)

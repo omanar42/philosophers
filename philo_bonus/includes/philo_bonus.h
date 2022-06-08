@@ -6,7 +6,7 @@
 /*   By: omanar <omanar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 22:45:33 by omanar            #+#    #+#             */
-/*   Updated: 2022/06/07 02:43:34 by omanar           ###   ########.fr       */
+/*   Updated: 2022/06/08 19:13:32 by omanar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,28 @@
 # include <pthread.h>
 # include <sys/time.h>
 # include <semaphore.h>
+# include <stdatomic.h>
 
 typedef struct s_data {
-	int		full;
-	int		meals;
-	int		nb_of_phs;
-	long	time_to_die;
-	long	time_to_eat;
-	long	time_to_sleep;
-	long	start_time;
-	sem_t	*time;
-	sem_t	*fork;
-	sem_t	*message;
+	int			full;
+	int			meals;
+	int			nb_of_phs;
+	long		time_to_die;
+	long		time_to_eat;
+	long		time_to_sleep;
+	atomic_long	start_time;
+	sem_t		*time;
+	sem_t		*fork;
+	sem_t		*message;
 }	t_data;
 
 typedef struct s_philo {
-	int			id;
-	int			meals;
-	long		last_meal_time;
-	pid_t		pid;
-	pthread_t	th;
-	t_data		*data;
+	int				id;
+	int				meals;
+	atomic_int		last_meal_time;
+	pid_t			pid;
+	pthread_t		th;
+	t_data			*data;
 }	t_philo;
 
 int		ft_atoi(const char *str);
@@ -57,5 +58,6 @@ long	get_time(long start);
 void	ft_usleep(long usec);
 void	printer(t_philo *ph, char *str, long time);
 void	*shinigami(void *arg);
+void	finish_all(t_philo *ph);
 
 #endif

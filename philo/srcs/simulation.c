@@ -6,7 +6,7 @@
 /*   By: omanar <omanar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 18:41:18 by omanar            #+#    #+#             */
-/*   Updated: 2022/06/06 22:05:54 by omanar           ###   ########.fr       */
+/*   Updated: 2022/06/08 20:24:23 by omanar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	thinking(t_philo *ph)
 
 void	died(t_philo *ph)
 {
-	pthread_mutex_lock(&ph->data->message);
+	pthread_mutex_lock(&ph->data->output);
 	printf("%ld ms : Philosopher %d deid\n",
 		get_time(ph->data->start_time), ph->id);
 }

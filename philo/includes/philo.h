@@ -6,7 +6,7 @@
 /*   By: omanar <omanar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 13:04:43 by omanar            #+#    #+#             */
-/*   Updated: 2022/06/07 01:46:46 by omanar           ###   ########.fr       */
+/*   Updated: 2022/06/08 20:24:11 by omanar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_data {
 	long			start_time;
 	pthread_mutex_t	time;
 	pthread_mutex_t	*mutex;
-	pthread_mutex_t	message;
+	pthread_mutex_t	output;
 }	t_data;
 
 typedef struct s_philo {
@@ -42,7 +42,7 @@ typedef struct s_philo {
 	t_data		*data;
 }	t_philo;
 
-int		ft_atoi(const char *str);
+long	ft_atoi(const char *str);
 int		checker(char **av);
 void	parsing(t_data *data, int ac, char **av);
 void	preparing(t_data *data, t_philo *ph);

@@ -6,45 +6,31 @@
 /*   By: omanar <omanar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 17:11:44 by omanar            #+#    #+#             */
-/*   Updated: 2022/05/28 18:39:47 by omanar           ###   ########.fr       */
+/*   Updated: 2022/06/08 20:05:59 by omanar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-static int	ft_checklong(int res, int count, int is_neg)
+static long	ft_loop(const char *str, int i, int is_neg)
 {
-	if (count > 19)
-	{
-		if (is_neg == -1)
-			return (0);
-		else if (is_neg == 1)
-			return (-1);
-	}
-	return (res * is_neg);
-}
-
-static int	ft_loop(const char *str, int i, int count, int is_neg)
-{
-	int	p;
-	int	res;
+	long	res;
 
 	res = 0;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		res = (res * 10) + (str[i++] - '0');
-		count++;
+		if (res > 2147483647)
+			return (0);
 	}
-	p = ft_checklong(res, count, is_neg);
-	return (p);
+	return (res * is_neg);
 }
 
-int	ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
-	int	i;
-	int	is_neg;
-	int	count;
-	int	p;
+	int		i;
+	int		is_neg;
+	long	p;
 
 	is_neg = 1;
 	i = 0;
@@ -55,7 +41,6 @@ int	ft_atoi(const char *str)
 		is_neg = -1;
 	if (is_neg == -1 || str[i] == '+')
 		i++;
-	count = 0;
-	p = ft_loop(str, i, count, is_neg);
+	p = ft_loop(str, i, is_neg);
 	return (p);
 }

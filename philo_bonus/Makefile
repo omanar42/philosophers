@@ -11,7 +11,7 @@
 # *********************************************** #
 
 NAME	=	philo_bonus
-CC		=	gcc 
+CC		=	gcc
 RM		=	rm -f
 SRCS	=	srcs/philo_bonus.c srcs/philo_utils.c srcs/ft_atoi.c srcs/simulation.c srcs/printer.c
 OBJS	=	$(SRCS:.c=.o)
@@ -36,7 +36,7 @@ header_b:
 
 $(NAME): $(OBJS)
 	@echo "\033[0;36m</ Compiling philo_bonus >\033[0m"
-	@$(CC) $(OBJS) -o $(NAME) -lpthread
+	@$(CC) -lpthread $(OBJS) -o $(NAME)
 	@echo "\033[1;32mphilo_bonus has been compiled!\033[0m\n"
 
 bonus: header_b $(NAME)

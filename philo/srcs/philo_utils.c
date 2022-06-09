@@ -6,7 +6,7 @@
 /*   By: omanar <omanar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 18:43:12 by omanar            #+#    #+#             */
-/*   Updated: 2022/06/06 22:35:33 by omanar           ###   ########.fr       */
+/*   Updated: 2022/06/09 23:49:52 by omanar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	checker(char **av)
 	i = 1;
 	while (av[i])
 	{
+		if (ft_atoi(av[i]) == 0)
+			return (1);
 		if (av[i][0] == 0)
 			return (1);
 		j = 0;
@@ -49,7 +51,7 @@ void	parsing(t_data *data, int ac, char **av)
 	data->full = 0;
 	data->start_time = get_time(0);
 	pthread_mutex_init(&data->time, NULL);
-	pthread_mutex_init(&data->message, NULL);
+	pthread_mutex_init(&data->output, NULL);
 	data->mutex = malloc(sizeof(pthread_mutex_t) * data->nb_of_phs);
 }
 

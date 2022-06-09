@@ -6,7 +6,7 @@
 /*   By: omanar <omanar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 18:43:12 by omanar            #+#    #+#             */
-/*   Updated: 2022/06/08 00:11:49 by omanar           ###   ########.fr       */
+/*   Updated: 2022/06/10 00:23:29 by omanar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	checker(char **av)
 	i = 1;
 	while (av[i])
 	{
+		if (ft_atoi(av[i]) == 0)
+			return (1);
 		if (av[i][0] == 0)
 			return (1);
 		j = 0;
@@ -46,16 +48,12 @@ void	parsing(t_data *data, int ac, char **av)
 		data->meals = ft_atoi(av[5]);
 	else
 		data->meals = -1;
-	data->full = 0;
 	data->start_time = get_time(0);
-	sem_unlink("time");
-	sem_unlink("fork");
-	sem_unlink("message");
-	data->time = sem_open("time", O_CREAT, 0664, 1);
-	data->fork = sem_open("fork", O_CREAT, 0664, data->nb_of_phs);
-	data->message = sem_open("message", O_CREAT, 0664, 1);
-	if (data->time == SEM_FAILED || data->fork == SEM_FAILED
-		|| data->message == SEM_FAILED)
+	sem_unlink(SEM_FORK);
+	sem_unlink(SEM_OUTPUT);
+	data->fork = sem_open(SEM_FORK, O_CREAT, 0664, data->nb_of_phs);
+	data->output = sem_open(SEM_OUTPUT, O_CREAT, 0664, 1);
+	if (data->fork == SEM_FAILED || data->output == SEM_FAILED)
 	{
 		printf("Error: Semaphore Failed\n");
 		exit(EXIT_FAILURE);
@@ -83,12 +81,9 @@ void	*shinigami(void *arg)
 	long	time;
 
 	ph = (t_philo *)arg;
-	ph->data->start_time = get_time(0);
 	while (1)
 	{
-		wait(ph->data->time);
 		time = get_time(ph->data->start_time + ph->last_meal_time);
-		sem_post(ph->data->time);
 		if (time >= ph->data->time_to_die)
 			died(ph);
 	}

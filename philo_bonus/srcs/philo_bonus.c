@@ -6,7 +6,7 @@
 /*   By: omanar <omanar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 22:48:12 by omanar            #+#    #+#             */
-/*   Updated: 2022/06/07 02:34:40 by omanar           ###   ########.fr       */
+/*   Updated: 2022/06/09 23:55:42 by omanar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	philosophers(t_philo *ph)
 		}
 		else if (pid != 0)
 			ph[i].pid = pid;
-		if (pid == 0)
+		else
 			simulation(&ph[i]);
 		i++;
 	}
@@ -63,8 +63,7 @@ int	main(int ac, char **av)
 	preparing(data, ph);
 	philosophers(ph);
 	finish_all(ph);
-	sem_close(data->time);
 	sem_close(data->fork);
-	sem_close(data->message);
+	sem_close(data->output);
 	return (0);
 }

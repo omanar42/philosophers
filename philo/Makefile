@@ -36,7 +36,7 @@ header_m:
 
 $(NAME): $(OBJS)
 	@echo "\033[0;36m</ Compiling Philosophers >\033[0m"
-	@$(CC) $(OBJS)  -o $(NAME)
+	@$(CC) -lpthread $(OBJS)  -o $(NAME)
 	@echo "\033[1;32mPhilosophers has been compiled!\033[0m\n"
 
 clean:

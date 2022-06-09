@@ -6,7 +6,7 @@
 /*   By: omanar <omanar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 18:41:18 by omanar            #+#    #+#             */
-/*   Updated: 2022/06/08 00:03:11 by omanar           ###   ########.fr       */
+/*   Updated: 2022/06/09 23:41:45 by omanar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	thinking(t_philo *ph)
 
 void	died(t_philo *ph)
 {
-	sem_wait(ph->data->message);
+	sem_wait(ph->data->output);
 	printf("%ld ms : Philosopher %d deid\n",
 		get_time(ph->data->start_time), ph->id);
 	exit(1);
@@ -49,9 +49,7 @@ void	died(t_philo *ph)
 
 void	simulation(t_philo *ph)
 {
-	pthread_t	th;
-
-	if (pthread_create(&th, NULL, &shinigami, ph) != 0)
+	if (pthread_create(&ph->th, NULL, &shinigami, ph) != 0)
 	{
 		printf("Error: pthread failed to be created\n");
 		exit(EXIT_FAILURE);

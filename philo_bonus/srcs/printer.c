@@ -6,7 +6,7 @@
 /*   By: omanar <omanar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 18:40:13 by omanar            #+#    #+#             */
-/*   Updated: 2022/06/06 16:51:33 by omanar           ###   ########.fr       */
+/*   Updated: 2022/06/08 20:24:30 by omanar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_usleep(long usec)
 
 void	printer(t_philo *ph, char *str, long time)
 {
-	sem_wait(ph->data->message);
+	sem_wait(ph->data->output);
 	printf("%ld ms : Philosopher %d %s", time, ph->id, str);
-	sem_post(ph->data->message);
+	sem_post(ph->data->output);
 }

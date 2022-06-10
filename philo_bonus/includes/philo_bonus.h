@@ -19,6 +19,7 @@
 # include <signal.h>
 # include <pthread.h>
 # include <sys/time.h>
+# include <sys/wait.h>
 # include <semaphore.h>
 # include <stdatomic.h>
 

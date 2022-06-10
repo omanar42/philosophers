@@ -13,7 +13,7 @@
 NAME	=	philo_bonus
 CC		=	gcc
 RM		=	rm -f
-SRCS	=	srcs/philo_bonus.c srcs/philo_utils.c srcs/ft_atoi.c srcs/simulation.c srcs/printer.c
+SRCS	=	srcs/philo_bonus.c srcs/philo_utils.c srcs/ft_atoi.c srcs/simulation.c srcs/timing.c
 OBJS	=	$(SRCS:.c=.o)
 
 define HEADER_B

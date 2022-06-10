@@ -6,7 +6,7 @@
 /*   By: omanar <omanar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 18:43:12 by omanar            #+#    #+#             */
-/*   Updated: 2022/06/10 00:23:29 by omanar           ###   ########.fr       */
+/*   Updated: 2022/06/10 16:18:26 by omanar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,13 @@ int	checker(char **av)
 		i++;
 	}
 	return (0);
+}
+
+void	printer(t_philo *ph, char *str, long time)
+{
+	sem_wait(ph->data->output);
+	printf("%ld ms : Philosopher %d %s", time, ph->id, str);
+	sem_post(ph->data->output);
 }
 
 void	parsing(t_data *data, int ac, char **av)
